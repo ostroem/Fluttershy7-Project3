@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     [SerializeField] int tile_size;
     Vector3 target_position;
     int score = 0;
+    private Animator animator;
 
     private void Awake()
     {
         target_position = transform.position;
+        animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -63,5 +65,35 @@ public class Player : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public void SetAnimation(Hulahoop.Type type)
+    {
+        switch (type)
+        {
+            case Hulahoop.Type.Pink:
+                animator.SetBool("collideWithPink", true);
+                animator.SetBool("collideWithRed", false);
+                animator.SetBool("collideWithViolet", false);
+                break;
+            case Hulahoop.Type.Red:
+                animator.SetBool("collideWithRed", true);
+                animator.SetBool("collideWithPink", false);
+                animator.SetBool("collideWithViolet", false);
+                break;
+            case Hulahoop.Type.Violet:
+                animator.SetBool("collideWithViolet", true);
+                animator.SetBool("collideWithPink", false);
+                animator.SetBool("collideWithRed", false);
+                break;
+            default:
+                break;
+        }
+        
+    }
+
+    public void SetAnimationTrigger()
+    {
+        animator.SetTrigger("collision");
     }
 }

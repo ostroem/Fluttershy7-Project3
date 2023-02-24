@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -3510813013643188027}
   - component: {fileID: 503126806886102260}
   - component: {fileID: 2022537308812587183}
+  - component: {fileID: -2804477821543907924}
   m_Layer: 0
   m_Name: Hulahoop(Red)
   m_TagString: HulaHoop
@@ -121,5 +122,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.12}
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.5, y: 0.15}
   m_Direction: 1
+--- !u!114 &-2804477821543907924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873582441145887438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65858d89057436458a27d815135e6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
