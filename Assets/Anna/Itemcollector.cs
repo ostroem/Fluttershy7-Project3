@@ -15,7 +15,7 @@ public class ItemCollector : MonoBehaviour
         if (collision.gameObject.CompareTag("HulaHoop"))
         {
             player.AddScore(HulaHoop);
-            bananasText.text = "Score:" + player.GetScore();
+            bananasText.text = player.GetScore().ToString();
         }
     }
 }

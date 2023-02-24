@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 6044716495325926067}
   - component: {fileID: -3659076247549103387}
   - component: {fileID: -98662283901637266}
-  - component: {fileID: 6665607821976607277}
+  - component: {fileID: 7186424525361222651}
+  - component: {fileID: 5936198437670174899}
   m_Layer: 0
   m_Name: Hulahoop(Violet)
-  m_TagString: Untagged
+  m_TagString: HulaHoop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &6665607821976607277
+--- !u!70 &7186424525361222651
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,6 +121,22 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 0.25}
+  m_Offset: {x: -0.43, y: 0.02}
+  m_Size: {x: 0.15, y: 0.05}
+  m_Direction: 1
+--- !u!70 &5936198437670174899
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258856885555483002}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.41, y: 0.02}
+  m_Size: {x: 0.15, y: 0.05}
   m_Direction: 1

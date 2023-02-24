@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
             target_position.x += 1;
         }
 
+        if (IsOutOfBounds(target_position))
+        {
+            target_position = transform.position;
+        }
         Vector3 new_pos = Vector3.MoveTowards(transform.position, target_position, Time.deltaTime * movement_speed);
         transform.position = new_pos;
 
@@ -45,5 +49,19 @@ public class Player : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    private bool IsOutOfBounds(Vector3 position)
+    {
+        if (position.x <= Camera.main.ViewportToWorldPoint(Vector3.zero).x)
+        {
+            return true;
+        }
+        if(position.x >= Camera.main.ViewportToWorldPoint(Vector3.one).x)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }
