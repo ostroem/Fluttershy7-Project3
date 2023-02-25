@@ -20,6 +20,7 @@ public class ItemCollector : MonoBehaviour
             player.AddScore(HulaHoop);
             scoreText.text = player.GetScore().ToString();
             hoop.gameObject.SetActive(false);
+            print("Collided");
         }
     }
 }

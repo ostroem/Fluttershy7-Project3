@@ -10,13 +10,14 @@ public class Player : MonoBehaviour
     Vector3 target_position;
     int score = 0;
     private Animator animator;
+    private int totalHulas = 0;
 
     private void Awake()
     {
         target_position = transform.position;
         animator = GetComponent<Animator>();
     }
-    // Update is called once per frame
+
     void Update()
     {
         movement();
@@ -75,21 +76,55 @@ public class Player : MonoBehaviour
                 animator.SetBool("collideWithPink", true);
                 animator.SetBool("collideWithRed", false);
                 animator.SetBool("collideWithViolet", false);
+                switch (totalHulas)
+                {
+                    case 1:
+                        animator.SetTrigger("pinkHula");
+                        break;
+                    case 2:
+                        animator.SetTrigger("secondPink");
+                        break;
+                    default:
+                        break;
+                }
+
                 break;
             case Hulahoop.Type.Red:
                 animator.SetBool("collideWithRed", true);
                 animator.SetBool("collideWithPink", false);
                 animator.SetBool("collideWithViolet", false);
+                switch (totalHulas)
+                {
+                    case 1:
+                        animator.SetTrigger("redHula");
+                        break;
+                    case 2:
+                        animator.SetTrigger("secondRed");
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case Hulahoop.Type.Violet:
                 animator.SetBool("collideWithViolet", true);
                 animator.SetBool("collideWithPink", false);
                 animator.SetBool("collideWithRed", false);
+                switch (totalHulas)
+                {
+                    case 1:
+                        animator.SetTrigger("violetHula");
+                        break;
+                    case 2:
+                        animator.SetTrigger("secondViolet");
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
         }
-        
+        totalHulas++;
     }
 
     public void SetAnimationTrigger()
