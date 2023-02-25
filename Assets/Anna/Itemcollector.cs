@@ -7,15 +7,20 @@ using TMPro;
 public class ItemCollector : MonoBehaviour
 {
     [SerializeField] private int HulaHoop = 0;
-    [SerializeField] private TMP_Text bananasText;
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Player player;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("HulaHoop"))
-        {
+        Hulahoop hoop = collision.gameObject?.GetComponent<Hulahoop>();
+        if (hoop) {
+
+            player.SetAnimationTrigger();
+            player.SetAnimation(hoop.type);
             player.AddScore(HulaHoop);
-            bananasText.text = player.GetScore().ToString();
+            scoreText.text = player.GetScore().ToString();
+            hoop.gameObject.SetActive(false);
+            print("Collided");
         }
     }
 }
