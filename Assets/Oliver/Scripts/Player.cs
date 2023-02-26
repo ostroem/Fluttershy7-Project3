@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
@@ -18,27 +19,68 @@ public class Player : MonoBehaviour
     float elapsedTimeSinceLastShake = 0.0f;
     float timeToRemoveHula = 0.0f;
     List<Hulahoop> hulas;
+    [SerializeField] GameObject[] particleEffects;
+    [SerializeField] AudioSource loseAudio;
+    [SerializeField] AudioSource comboAudio;
+    [SerializeField] AudioSource scorePointAudio;
+    [SerializeField] AudioSource successAudio;
     public int TotalHulas { get => totalHulasEquipped; }
     public bool easyCollision = false;
+    public int MissedHulas { get; set; }
 
+
+
+    enum State
+    {
+        Play,
+        Lose
+    }
+    State state;
     private void Awake()
     {
         target_position = transform.position;
         animator = GetComponent<Animator>();
         hulas = new List<Hulahoop>();
+        foreach (var particle in particleEffects)
+            particle.SetActive(false);
     }
 
     void Update()
     {
-        movement();
-        shake_body();
-        checkHulas();
-        update_score_text();
-
-        if (want_to_remove_hula())
+        switch (state)
         {
-            remove_last_hula();
+            case State.Play:
+                if(MissedHulas > 2)
+                {
+                    foreach (var particle in particleEffects)
+                        particle.SetActive(true);
+                    state = State.Lose;
+                    animator.SetTrigger("lose");
+                    GameManager.Instance.Hulahoop_Falling.StopFalling();
+                    loseAudio.Play();
+                    return;
+                }
+                movement();
+                shake_body();
+                checkHulas();
+                update_score_text();
+
+                if (want_to_remove_hula())
+                {
+                    remove_last_hula();
+                }
+                break;
+            case State.Lose:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SceneManager.LoadScene(0);
+                    return;
+                }
+                break;
+            default:
+                break;
         }
+
     }
 
     private void update_score_text()
@@ -54,6 +96,7 @@ public class Player : MonoBehaviour
             {
                 score += pointsForColorCombo;
                 animator.SetTrigger("removeAllPink");
+                comboAudio.Play();
                 totalHulasEquipped = 0;
                 hulas.Clear();
             }
@@ -61,6 +104,7 @@ public class Player : MonoBehaviour
             {
                 score += pointsForColorCombo;
                 animator.SetTrigger("removeAllRed");
+                comboAudio.Play();
                 totalHulasEquipped = 0;
                 hulas.Clear();
             }
@@ -68,6 +112,16 @@ public class Player : MonoBehaviour
             {
                 score += pointsForColorCombo;
                 animator.SetTrigger("removeAllViolet");
+                comboAudio.Play();
+                totalHulasEquipped = 0;
+                hulas.Clear();
+            }
+            else
+            {
+                animator.SetTrigger("removeAllViolet");
+                animator.SetTrigger("removeAllPink");
+                animator.SetTrigger("removeAllRed");
+                successAudio.Play();
                 totalHulasEquipped = 0;
                 hulas.Clear();
             }
@@ -155,6 +209,7 @@ public class Player : MonoBehaviour
     public void AddScore(int score)
     {
         this.score += score;
+        scorePointAudio.Play();
     }
 
     public int GetScore()
