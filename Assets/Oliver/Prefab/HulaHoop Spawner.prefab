@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6403674079402084731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6403674079402084729}
+  - component: {fileID: 6403674079402084730}
+  m_Layer: 0
+  m_Name: HulaHoop Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6403674079402084729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403674079402084731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6403674079402084730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403674079402084731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db19ac082293c564e80f234dcdee7358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoopPrefab:
+  - {fileID: 8534620065828444519, guid: 3cc66f4aaedaceb4f8479133fdae573b, type: 3}
+  - {fileID: 1873582441145887438, guid: 7aec8343dd67b034eafa7f483b9f2ae3, type: 3}
+  - {fileID: 8258856885555483002, guid: 70b36196866b8fe4eb69589a595c650c, type: 3}
+  nextSpawn: 1.5
+  minRange: -2
+  maxRange: 2
+  fallSpeed: 2
+  isSpawnPointInt: 1

@@ -8,7 +8,7 @@ public class ItemCollector : MonoBehaviour
 {
     [SerializeField] private int hulaPoints = 1;
     [SerializeField] private Player player;
-
+    private Hulahoop lastHulahoop;
     [SerializeField] bool easyCollision = false;
 
     private void Awake()
@@ -18,22 +18,25 @@ public class ItemCollector : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Hulahoop hoop = collision.gameObject?.GetComponent<Hulahoop>();
-        if (easyCollision && player.TotalHulas < 3)
+        if (easyCollision && player.TotalHulas < 3 && lastHulahoop != hoop)
         {
             player.SetAnimationTrigger();
             player.SetAnimation(hoop);
             player.AddScore(hulaPoints);
-            hoop.gameObject.SetActive(false);
-        }
-        if (hoop.transform.rotation.eulerAngles.z <= 0.5f && player.GetIsShaking() && player.TotalHulas < 3) {
-            player.SetAnimationTrigger();
-            player.SetAnimation(hoop);
-            player.AddScore(hulaPoints);
+            player.MissedHulas = 0;
             hoop.gameObject.SetActive(false);
             return;
         }
-
-
+        if (hoop.transform.rotation.eulerAngles.z <= 0.5f && player.GetIsShaking() && player.TotalHulas < 3 && lastHulahoop != hoop) {
+            player.SetAnimationTrigger();
+            player.SetAnimation(hoop);
+            player.AddScore(hulaPoints);
+            player.MissedHulas = 0;
+            hoop.gameObject.SetActive(false);
+            return;
+        }
+        lastHulahoop = hoop;
+        player.MissedHulas++;
 
         float random = Random.Range(0, 2);
         if(random == 0)

@@ -24,7 +24,10 @@ public class Hulahoop_Falling : MonoBehaviour
 
     }
 
-
+    public void StopFalling()
+    {
+        StopAllCoroutines();
+    }
     IEnumerator HoopSpawn()
     {
         while (true)
