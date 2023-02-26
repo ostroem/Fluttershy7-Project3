@@ -13,15 +13,25 @@ public class ItemCollector : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Hulahoop hoop = collision.gameObject?.GetComponent<Hulahoop>();
-        if (hoop) {
-
+        if (hoop.transform.rotation.eulerAngles.z <= 0.5f && player.GetIsShaking()) {
             player.SetAnimationTrigger();
             player.SetAnimation(hoop.type);
             player.AddScore(HulaHoop);
             scoreText.text = player.GetScore().ToString();
             hoop.gameObject.SetActive(false);
-            print("Collided");
+            return;
         }
+
+        float random = Random.Range(0, 2);
+        if(random == 0)
+        {
+            hoop.GetComponent<Rigidbody2D>().MoveRotation(-30);
+        }
+        else
+        {
+            hoop.GetComponent<Rigidbody2D>().MoveRotation(30);
+        }
+
     }
 }
 
