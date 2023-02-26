@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     bool isShaking = false;
     float elapsedTimeSinceShake = 0.0f;
+    [SerializeField] int timesShaken = 0;
 
     private void Awake()
     {
@@ -35,14 +36,22 @@ public class Player : MonoBehaviour
             isShaking = true;
             animator.SetTrigger("shakingBody");
             elapsedTimeSinceShake = 0.0f;
+            timesShaken++;
         }
         else {
             elapsedTimeSinceShake += Time.deltaTime;
             if(elapsedTimeSinceShake >= 0.32f)
             {
+                timesShaken = 0;
                 isShaking = false;
             }
 
+        }
+
+        if(timesShaken > 2)
+        {
+            totalHulasEquipped = 2;
+            animator.SetTrigger("removeHula");
         }
     }
 
